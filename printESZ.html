@@ -1,0 +1,195 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+
+        <title>Print</title>            
+        <style type="text/css" media="print">
+            @page { 
+                size: auto;  
+                margin: 0; 
+                margin-top: 5; 
+                font-size: 10px;
+            }
+            @media print  { .noprint  { display: none; } }
+        </style>
+        <style rel="stylesheet" type="text/css">
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 15px;
+            }
+
+            [v-cloak] {
+                display: none;
+            }
+
+        </style>
+    </head>
+    <!--<body onload="window.print()"> -->
+    <body>
+        <div id="printapp">            
+            <div v-for="index in gen_egyszerusitett_szamla_peldanyszam" v-cloak style="margin-left:5px; width:270px; background-color: rgba(196, 116, 116, 0.842);">
+                <div class="card" v-for="p in penztar">                                                            
+                    <div style="width: 100%; text-align: center;">Sulyán és Fiai Kft.</div>
+                    <div style="width: 100%; text-align: center;">Veresegyház, Kálvin út 16.</div>
+                    <div style="width: 100%; text-align: center;">Adószám: 10824580-2-13</div>
+                    <div style="width: 100%; text-align: center;">Tel.: 28/385-377</div>
+                    
+                    <div style="width: 100%;">
+                        <i>------------------------------------------------------</i><br>
+                        <div style="text-align: center"> EGYSZERŰSÍTETT SZÁMLA</div>
+                        <i>------------------------------------------------------</i>
+                    </div>
+                    <div style="width: 100%;">
+                        <font style="font-size:12px;"> <b> Vevő:</b></font><br>
+                        <font style="font-size:12px;">Teszt Elemér</font><br>
+                        <font style="font-size:12px;">Veresegyház, Bartók Béla 2</font><br>
+                        <font style="font-size:12px;">Adószám: 123456789</font>
+                    </div>
+                    <i>------------------------------------------------------</i>
+
+                    <table style="width: 100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="width: 100%; font-size:12px;">Megnevezés</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td style="width: 20%; font-size:12px;">Mennyiség</td>
+                                        <td style="width: 10%; font-size:12px;">ME</td>
+                                        <td style="width: 20%; font-size:12px;">Egységár</td>
+                                        <td style="width: 20%; font-size:12px;" align="right">Érték Áfa</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <i>------------------------------------------------------</i>
+                    <table v-for="item in p.items" style="width: 100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="width: 100%; font-size:12px;">*{{ item.name_single | uppercase }}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="width: 100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td style="width: 20%; font-size:12px;" align="right">{{item.menny}}</td>
+                                        <td style="width: 10%; font-size:12px;"> &nbsp;db</td>
+                                        <td style="width: 20%; font-size:12px;">{{ item.ossz }} Ft/db</td>
+                                        <td style="width: 20%; font-size:12px;" align="right">{{ item.ossz }} C</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table style="width: 100%">
+                        <tr>
+                            <td style="width: 60%"><font style="font-size: 14px;"> C 21,26%: </font></td>
+                            <td style="width: 40%;" align="right"><font style="font-size: 14px;">{{ p.szum }} Ft</font></td>
+                        </tr>
+                    </table>
+
+                    <i>------------------------------------------------------</i>                    
+                    <table style="width: 100%">                        
+                        <tr>
+                            <td style="width: 60%"> ÖSSZESEN:</td>
+                            <td style="width: 40%;" align="right"><b><font style="font-size: 17px;">{{ p.szum }} Ft</font></b></td>
+                        </tr>
+                    </table>                    
+                    <i>------------------------------------------------------</i>
+
+                    <div>Bizonylatszám: E-00001/2020</div>
+                    <br>
+                    <div style="text-align: center">A számla 2 példányban készült</div>
+                    <div style="text-align: center">Kelt: {{ p.ido }}</div>
+                    <div style="text-align: center"># {{ p.id }}</div>
+
+                    <div style="text-align: center">{{ p.ido }}</div>
+
+                </div>
+                <br>                
+                <div style="text-align: center">___________________</div>                
+                <br>
+
+            </div>
+            
+        </div>
+
+        <form>
+            <!-- <input class="noprint" type="button" value="Print Page" onClick="window.print()"> -->
+        </form>       
+        
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <script>            
+
+            function geturlparam (name) {
+                var ret = "";
+                var results = new RegExp("[\?&]" + name + "=([^&#]*)").exec(window.location.href);
+
+                if(results) {
+                    ret = results[1] || 0;
+                }
+                return ret;
+            }
+
+            var printapp = new Vue({
+                el: '#printapp',
+                data: {
+                    id: 0,
+                    ls_my_session: '', 
+                    dataURLPenztarConst: 'https://www.mysystem.hu/RestService/penztar/view/',
+                    penztar: [],
+                    penztaritems: [],
+                    showPartnerData: false,
+                    partner: [],
+                    frissensultek: [],
+                    gen_egyszerusitett_szamla_peldanyszam: 2
+                },
+                mounted(){
+                    var self = this;
+
+                    self.id = geturlparam("id");
+                    self.ls_my_session = localStorage.getItem("my_session");
+
+                    var lUrl = self.dataURLPenztarConst  + self.id + '/' + self.ls_my_session;
+
+                    $.getJSON(lUrl, function (penztarData) {
+                        self.penztar = JSON.parse(penztarData.data);          
+                        console.log(JSON.stringify(self.penztar));              
+
+                        if(self.penztar[0].partner_id > 0){
+                            self.showPartnerData = true;
+                        }
+
+                        if(self.penztar[0].items){
+                            for(var i=0; i<self.penztar[0].items.length; i++){
+                                if(self.penztar[0].items[i].frissensulte == "I"){
+                                    self.frissensultek.push({id: self.penztar[0].items[i].id, name: self.penztar[0].items[i].name, menny: self.penztar[0].items[i].menny });
+                                }       
+                            }
+                        }
+
+                        console.log(JSON.stringify(self.frissensultek));              
+
+                        setTimeout(function () {
+                            window.print();
+                        }, 1000);                        
+                    });                    
+                },
+                filters: {
+                    uppercase: function(v) {
+                    return v.toUpperCase();
+                    }
+                }
+            })
+        </script>
+        
+        
+
+    </body>
+</html>

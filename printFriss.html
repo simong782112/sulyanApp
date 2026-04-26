@@ -1,0 +1,149 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+
+        <title>Print</title>            
+        <style type="text/css" media="print">
+            @page { 
+                size: auto;  
+                margin: 0; 
+                margin-top: 5; 
+                font-size: 10px;
+            }
+            @media print  { .noprint  { display: none; } }
+        </style>
+        <style rel="stylesheet" type="text/css">
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 15px;
+            }
+
+            [v-cloak] {
+                display: none;
+            }
+
+        </style>
+    </head>
+    <!--<body onload="window.print()"> -->
+    <body>
+        <div id="printapp">
+            <div v-cloak style="margin-left:5px; width:270px; background-color: rgba(196, 116, 116, 0.842);">
+                <div class="card" v-for="p in penztar">                                                            
+                    <div style="width: 100%; text-align: center;">
+                        Marika konyhája Családi Gyorsétterem<br>                        
+                    </div>                    
+                    <br>
+                    <i v-if="frissensultek.length > 0">------------------------------------------------------</i>                    
+                    <div class="card"  v-if="frissensultek.length > 0">
+                        <div style="width: 100%; text-align: center; padding-top: 10px;"><b>RENDELÉS #{{ p.napisorszam }}</b></div>
+                        <i>------------------------------------------------------</i>                    
+                        <table v-for="item in frissensultek" style="width: 100%" cellpadding="0" cellspacing="0">                        
+                            <tr>
+                                <td style="padding-left:15px;" colspan="2">{{item.menny}} db</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 80%; font-size:12px;">{{ item.name | uppercase }} </td>
+                            </tr>
+                        </table>        
+                                        
+                    </div>
+
+                    <i v-if="frissensultek.length > 0">------------------------------------------------------</i>  
+                                        
+                    <table style="width: 100%">                        
+                        <tr>
+                            <td style="width: 60%"><b><font style="font-size: 17px;"> ÖSSZESEN: </font></b></td>
+                            <td style="width: 40%;" align="right"><b><font style="font-size: 17px;">{{ p.szum }} Ft</font></b></td>
+                        </tr>
+                    </table>                    
+                    <i>------------------------------------------------------</i>                    
+                    
+                    <div style="text-align: center">{{ p.ido }}</div>
+
+                </div>
+            </div>
+            
+        </div>
+
+        <form>
+            <!-- <input class="noprint" type="button" value="Print Page" onClick="window.print()"> -->
+        </form>       
+        
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <script>            
+
+            function geturlparam (name) {
+                var ret = "";
+                var results = new RegExp("[\?&]" + name + "=([^&#]*)").exec(window.location.href);
+
+                if(results) {
+                    ret = results[1] || 0;
+                }
+                return ret;
+            }
+
+            var printapp = new Vue({
+                el: '#printapp',
+                data: {
+                    id: 0,
+                    ls_my_session: '', 
+                    dataURLPenztarConst: 'https://www.mysystem.hu/RestService/penztar/view/',
+                    penztar: [],
+                    penztaritems: [],
+                    showPartnerData: false,
+                    partner: [],
+                    frissensultek: []
+                },
+                mounted(){
+                    var self = this;
+
+                    self.id = geturlparam("id");
+                    self.ls_my_session = localStorage.getItem("my_session");
+
+                    var lUrl = self.dataURLPenztarConst  + self.id + '/' + self.ls_my_session;
+
+                    $.getJSON(lUrl, function (penztarData) {
+                        self.penztar = JSON.parse(penztarData.data);          
+
+                        if(self.penztar) {
+                            if(self.penztar.length > 0){
+                                if(self.penztar[0].partner_id > 0){
+                                    self.showPartnerData = true;
+                                }
+                            }
+
+                            if(self.penztar[0].items){
+                                for(var i=0; i<self.penztar[0].items.length; i++){
+                                    //if(self.penztar[0].items[i].frissensulte == "I"){
+                                        
+                                        if(self.penztar[0].items[i].inout == "OUT"){
+                                            self.frissensultek.push({id: self.penztar[0].items[i].id, name: self.penztar[0].items[i].name + " + doboz", menny: self.penztar[0].items[i].menny });
+                                        }else{
+                                            self.frissensultek.push({id: self.penztar[0].items[i].id, name: self.penztar[0].items[i].name, menny: self.penztar[0].items[i].menny });
+                                        }
+                                    //}       
+                                }
+                            }          
+                        }
+
+                        setTimeout(function () {
+                            window.print();
+                        }, 1000);                        
+                    });                    
+                },
+                filters: {
+                    uppercase: function(v) {
+                    return v.toUpperCase();
+                    }
+                }
+            })
+        </script>
+        
+        
+
+    </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sulyán Cukrászda - árcédulák</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Karma:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=MonteCarlo&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="dist/css_cimke/sulyan-cimke.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <style rel="stylesheet" type="text/css">
+        [v-cloak] {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app3">  </div>
+    <div id="printapp" class="wrapper">
+
+        <!--<div class="label">
+            <div class="name">Csurgatott torta</div>
+            <div class="price">1 695 Ft</div>
+            <div class="sign-t"></div>
+            <div class="sign-b"></div>
+            <div class="sign-l"></div>
+            <div class="sign-r"></div>
+        </div>
+
+        <div class="label">
+            <div class="name">Cukor-, laktóz- és lisztmentes Csipkebogyós vörösáfonyás tortaszelet</div>
+            <div class="price">598 Ft</div>
+            <div class="sign-t"></div>
+            <div class="sign-b"></div>
+            <div class="sign-r"></div>
+        </div>-->
+
+        <div class="label" v-for="(p,index) in list">
+            <div v-bind:class="{'name': p.name.length<20, 'name_small': p.name.length >=20 }">{{p.name}}</div>
+            <div class="price">{{p.price}} Ft</div>
+            <div class="sign-t"></div>
+            <div class="sign-b"></div>
+            <div class="sign-l" v-if="index%2==0"></div>
+            <div class="sign-r"></div>
+        </div>
+
+
+    </div>
+
+    <script>            
+
+        function geturlparam (name) {
+            var ret = "";
+            var results = new RegExp("[\?&]" + name + "=([^&#]*)").exec(window.location.href);
+
+            if(results) {
+                ret = results[1] || 0;
+            }
+            return ret;
+        }
+
+            //Vue.config.devtools = true;
+
+            var printapp = new Vue({
+                el: '#printapp',
+                data: {
+                    ids: "",
+                    ls_my_session: '', 
+                    dataURLTermekGetConst: 'https://www.mysystem.hu/RestService/keszlet/list',
+                    list: []
+
+                },
+                mounted(){
+                    var self = this;
+
+                    self.ids = geturlparam("product_ids");
+                    self.ls_my_session = localStorage.getItem("my_session");
+
+                    console.log(self.ids);
+
+                    $.getJSON(self.dataURLTermekGetConst+"/-/"+self.ls_my_session+"?productids="+self.ids, function (ret) {
+                        console.log(ret);
+                        self.list = JSON.parse(ret.data);  
+                    });
+                   
+                },
+                filters: {
+                    uppercase: function(v) {
+                        return v.toUpperCase();
+                    }
+                }
+            })
+
+
+    </script>  
+
+
+</body>
+
+</html>

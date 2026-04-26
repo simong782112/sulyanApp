@@ -1,0 +1,153 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+
+        <title>Print</title>            
+        <style type="text/css" media="print">
+            @page { 
+                size: auto;  
+                margin: 0; 
+                margin-top: 5; 
+                font-size: 10px;
+            }
+            @media print  { .noprint  { display: none; } }
+        </style>
+        <style rel="stylesheet" type="text/css">
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 15px;
+            }
+
+            [v-cloak] {
+                display: none;
+            }
+
+        </style>
+    </head>
+    <!--<body onload="window.print()"> -->
+    <body>
+        <div id="printapp">
+            <div v-cloak style="margin-left:5px; width:270px; background-color: rgba(196, 116, 116, 0.842);">
+                <div class="card" v-for="p in order">                                                            
+                    <div style="width: 100%; text-align: center;">Sulyán és Fiai Kft.</div>
+                    <div style="width: 100%; text-align: center;">Veresegyház</div>
+                    <div style="width: 100%; text-align: center;">Kálvin út 16</div>
+                    <div style="width: 100%; text-align: center;">Tel.: 28/385-377</div>
+                                
+                    <i>------------------------------------------------------</i>
+                    <font style="font-size:12px;"> <b> Kiszállítási adatok:</b></font><br>
+                    <font style="font-size:12px;">{{ order[0].nev }}</font><br>
+                    <font style="font-size:12px;">{{ order[0].city }} {{ order[0].address }}</font><br>
+                    <font style="font-size:12px;">{{ order[0].parttel }}</font>
+                    <i>------------------------------------------------------</i>
+
+                    <table v-for="item in p.tetelek" style="width: 100%" cellpadding="0" cellspacing="0">                        
+                        <tr>
+                            <td v-if="item.menny > 1" style="padding-left:15px;" colspan="2">{{item.menny}} db * &nbsp; &nbsp; &nbsp; &nbsp; {{item.egysegar}} Ft /db</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 80%; font-size:12px;">{{ item.name | uppercase }} </td>
+                            <td style="width: 20%; font-size:12px;" align="right">{{ item.ertek }}</td>
+                        </tr>
+                    </table>
+                
+                    <i>------------------------------------------------------</i>                    
+                    <table style="width: 100%">                        
+                        <tr>
+                            <td style="width: 60%"><b><font style="font-size: 17px;"> ÖSSZESEN: </font></b></td>
+                            <td style="width: 40%;" align="right"><b><font style="font-size: 17px;">{{ p.osszeg }} Ft</font></b></td>
+                        </tr>
+                    </table>                    
+                    <i>------------------------------------------------------</i>
+
+                    <div style="text-align: center; padding-bottom: 5px; padding-top: 2px;">Jó étvágyat kívánunk!</div>
+                    
+                    <div style="text-align: center">{{ p.ido }}</div>
+                    <div style="text-align: center"># {{ p.id }}</div>
+                </div>
+            </div>
+            
+        </div>
+
+        <form>
+            <!-- <input class="noprint" type="button" value="Print Page" onClick="window.print()"> -->
+        </form>       
+        
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <script>            
+
+            function geturlparam (name) {
+                var ret = "";
+                var results = new RegExp("[\?&]" + name + "=([^&#]*)").exec(window.location.href);
+
+                if(results) {
+                    ret = results[1] || 0;
+                }
+                return ret;
+            }
+
+            var printapp = new Vue({
+                el: '#printapp',
+                data: {
+                    id: 0,
+                    nopay: 0,
+                    ls_my_session: '', 
+                    dataURLOrderConst: 'https://www.mysystem.hu/RestService/order/view/',
+                    dataURLPayOrderConst: 'https://www.mysystem.hu/RestService/order/pay/',
+                    order: [],
+                    orderitems: [],
+                    partner: []
+                },
+                mounted(){
+                    var self = this;
+
+                    self.id = geturlparam("id");
+                    self.nopay = geturlparam("nopay");
+                    self.ls_my_session = localStorage.getItem("my_session");
+
+                    var lUrl = self.dataURLOrderConst  + self.id + '/' + self.ls_my_session;
+
+                    $.getJSON(lUrl, function (orderData) {
+                        self.order = JSON.parse(orderData.data);                        
+
+                        setTimeout(function () {
+                            window.print();  
+
+                            if(self.nopay == 0){
+
+                                //fizetés rögzítése
+                                var saveRecArray = [];
+                                saveRecArray.push({MFID: self.id, erv: "N"});
+
+                                var lUrl = self.dataURLPayOrderConst  + self.id + '/' + self.ls_my_session;
+                                
+                                $.post(
+                                    lUrl,
+                                    {datastream: JSON.stringify(saveRecArray), session_id: self.logindata_session },
+                                    function(response) {
+                                        console.log(response);
+                                    },
+                                "json");
+
+                            }
+                            
+                        }, 1000);                        
+
+                    });                    
+                },
+                filters: {
+                    uppercase: function(v) {
+                    return v.toUpperCase();
+                    }
+                }
+            })
+        </script>
+        
+        
+
+    </body>
+</html>

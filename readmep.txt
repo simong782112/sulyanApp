@@ -1,0 +1,5 @@
+
+chrome --kiosk-printing
+
+Firefox:
+

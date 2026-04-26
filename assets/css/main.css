@@ -1,0 +1,627 @@
+[v-cloak] {
+    display: none;
+}
+
+body {
+    padding-top: 0px;
+    overscroll-behavior: none;
+}
+
+ul.list-group.col-lg-3 > li {
+    background-color: #e7e7e5;
+    color: #000033;
+    text-align: center;
+    font-size: 125%;                
+}
+
+ul.list-group.col-lg-3 > li.list-group-item:first-child {
+    background-color: #036f96;
+    color: white;
+    font-size: 200%;
+}
+ul.list-group.col-lg-3 > li.list-group-item:last-child {
+    background-color: #036f96;
+    color: white;
+    font-size: 200%;
+}            
+
+.penztaritemfooter {
+    text-align: center; 
+    background-color: #036f96; 
+    color: white;
+}
+
+.penztaritemfooterOnline {
+    text-align: center; 
+    background-color: #751609; 
+    color: white;
+}
+
+
+.badge {
+    background-color: #FAFAD2;
+    color: red;
+}
+
+.flex-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-grid-item {
+    
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 20%;
+    flex-basis: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;                
+    background-color: #e7e7e5;
+    color: #000033;
+    border-radius: 4px;
+    font-size: 10   0%;
+}
+
+.flex-grid-item2 {
+  height: 200px;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 20%;
+  flex-basis: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2px;                
+  background-color: #e7e7e5;
+  color: #000033;
+  border-radius: 4px;
+  font-size: 10   0%;
+}
+
+.flex-grid-item-spec {
+    height: 40px;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 25%;
+    flex-basis: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;                
+    background-color: #8d1d4cef;
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 120%;
+}
+
+.blank {
+    height: 0;
+}
+
+
+.flex3 {
+    /*background-color: #02a4e4;*/
+    color: white;
+}
+
+.flex4 {
+    background-color: rgb(20, 85, 11);
+    color: white;
+}       
+
+.divleft {
+    float:left; 
+    width: 70%;
+}
+
+.divleftp {
+    float:left; 
+    width: 30%;
+    height: 100%;
+    overflow: auto;
+}
+
+.divrightp {
+    float:left; 
+    width: 70%;
+}
+
+
+.divfull {
+    float:left; 
+    width: 70%;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}  
+
+.modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: table;
+    transition: opacity .3s ease;
+  }
+  
+.modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+  
+.modal-container {
+    width: 90%;    
+    margin: 0px auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all .3s ease;
+    font-family: Helvetica, Arial, sans-serif;
+}
+  
+.modal-header h3 {
+    margin-top: 0;
+    color: #42b983;
+}
+  
+.modal-body {
+    margin: 20px 0;
+}
+  
+.modal-default-button {
+    float: right;
+}
+  
+  /*
+   * The following styles are auto-applied to elements with
+   * transition="modal" when their visibility is toggled
+   * by Vue.js.
+   *
+   * You can easily play with the modal transition by editing
+   * these styles.
+   */
+  
+.modal-enter {
+    opacity: 0;
+}
+  
+.modal-leave-active {
+    opacity: 0;
+}
+  
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input {display:none;}
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  /*------------------- main css ---*/
+  #main {
+    min-height: 780px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: row;
+}
+
+#main > article {
+    margin: 0px;
+    padding: 0px;
+    background: #6f767e;
+    flex: 3 1 60%;
+    order: 1;
+}
+
+#main > nav {
+    margin: 0px;
+    padding: 5px;
+    border: 0px solid #8888bb;                    
+    background: #e7e7e5;
+    flex: 1 6 20%;
+    order: 2;
+}
+
+#main > aside {
+    margin: 4px;
+    padding: 5px;
+    border: 1px solid #8888bb;                    
+    background: #ccccff;
+    flex: 1 6 20%;
+    order: 3;
+}
+
+header, footer {
+    display: block;
+    margin: 4px;
+    padding: 5px;
+    min-height: 40px;
+    border: 1px solid #eebb55;                
+    background: #ffeebb;
+}
+
+/* Too narrow to support three columns */
+@media all and (max-width: 640px) {
+    #main, #page {
+        flex-direction: column;
+    }
+
+        #main > article, #main > nav, #main > aside {
+            /* Return them to document order */
+            order: 0;
+        }
+
+        #main > nav, #main > aside, header, footer {
+            min-height: 50px;
+            max-height: 50px;
+        }
+}
+
+
+
+/****** LOGIN MODAL ******/
+.loginmodal-container {
+    padding: 5px;
+    max-width: 400px;
+    width: 100% !important;
+    background-color: #F7F7F7;
+    margin: 0 auto;
+    border-radius: 2px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    overflow: hidden;    
+  }
+  
+  .loginmodal-container h1 {
+    text-align: center;
+    font-size: 1.8em;    
+  }
+  
+  .loginmodal-container input[type=submit] {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  .loginmodal-container input[type=text], input[type=password] {
+    height: 44px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 10px;
+    -webkit-appearance: none;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    /* border-radius: 2px; */
+    padding: 0 8px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+  
+  .loginmodal-container input[type=text]:hover, input[type=password]:hover {
+    border: 1px solid #b9b9b9;
+    border-top: 1px solid #a0a0a0;
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  }
+  
+  .loginmodal {
+    text-align: center;
+    font-size: 14px;    
+    font-weight: 700;
+    height: 36px;
+    padding: 0 8px;
+  /* border-radius: 3px; */
+  /* -webkit-user-select: none;
+    user-select: none; */
+  }
+  
+  .loginmodal-submit {
+    /* border: 1px solid #3079ed; */
+    border: 0px;
+    color: #fff;
+    text-shadow: 0 1px rgba(0,0,0,0.1); 
+    background-color: #4d90fe;
+    padding: 17px 0px;    
+    font-size: 24px;
+    /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
+  }
+  
+  .loginmodal-submit:hover {
+    /* border: 1px solid #2f5bb7; */
+    border: 0px;
+    text-shadow: 0 1px rgba(0,0,0,0.3);
+    background-color: #357ae8;
+    /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+  }
+  
+  .loginmodal-container a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 400;
+    text-align: center;
+    display: inline-block;
+    opacity: 0.6;
+    transition: opacity ease 0.5s;
+  } 
+  
+  .login-help{
+    font-size: 12px;
+  }
+
+  /****** LOGIN MODAL END ******/
+
+  /****** NUMPAD MODAL START ******/
+  .numpad {
+    width: 420px;
+    height: 500px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+  }
+  
+  .button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 33.3333%;
+    flex: 1 0 33.3333%;
+    background-color: #F9A03F;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+  .button:nth-of-type(10) {
+    -ms-flex-preferred-size: 66.6667%;
+        flex-basis: 66.6667%;
+  }
+  .button:hover {
+    background-color: #f89426;
+  }
+  
+  .playground {
+    height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+  }
+  
+  .general {
+    position: fixed;
+    left: 0;
+    right: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 40px;
+    padding: 0 20px;
+    background-color: white;
+  }
+  .general a {
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    font-family: "source-code-pro";
+    font-size: .8rem;
+    text-decoration: none;
+    color: #c9c9c9;
+    -webkit-transition: color 300ms ease;
+    transition: color 300ms ease;
+  }
+  .general a:hover {
+    color: #f89426;
+  }
+  .general a:last-of-type {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+  }
+
+  .divleftnp {
+    float:left; 
+    width: 500px;
+}
+
+
+  /****** NUMPAD MODAL END ******/
+
+
+  .frissorderdiv {
+    position: fixed; 
+    width: 200px; 
+    height: 150px; 
+    left: 80%; 
+    top: 250px; 
+    z-index: 999;
+  }
+
+.wrapper {
+    width: 1000px;
+    margin:0 auto;
+  }
+
+.box {
+    display: flex;
+    flex-wrap: wrap;
+    margin:-10px;
+    text-align: center;
+  }
+
+.box>* {
+    flex: 0 1 300px;
+    margin: 10px;
+    border: 1px dotted #e1caaa;
+}
+
+.box2 {
+    display: flex;
+    flex-wrap: wrap;
+    margin:-10px;
+    text-align: center;
+  }
+
+.box2>* {
+    flex: 0 1 440px;
+    margin: 10px;
+    border: 1px dotted #e1caaa;
+  }
+
+.penztar_penztar {
+    background-color: #036f96;
+    color: white;
+    text-align: center;
+}
+
+.penztar_online {
+  background-color: #034b2dbd;
+  color: white;
+  text-align: center;
+}
+
+.activebutton {
+  font-weight: bold;
+  font-size: 18px;
+  color: red;
+}
+
+tr.border_bottom td {
+  border-bottom: 1px solid black;
+}
+
+.piroscimke {
+  color: red;
+}
+
+.piroshatter {
+  background-color: red;
+  color: white;
+}
+
+.bootbox.modal {z-index: 9998 !important;}
+
+.my-swal {
+  z-index: 9999;
+}
+
+.table-container {
+  height: calc(100vh - 20px); /* Az egész képernyő magassága minusz néhány pixel a padding vagy margó miatt */
+  overflow-y: auto;
+}
+
+.table thead tr {
+  position: sticky;
+  top: 0;
+  background-color: white; /* Ezzel biztosítod, hogy a fejléc háttérszíne megmaradjon */
+  z-index: 1;
+}
+
+@keyframes blink-background {
+    0%, 100% { background-color: #007bff; }
+    50% { background-color: #ffc107; }
+}
+
+.blink-bg {
+    animation: blink-background 1.5s infinite;
+    font-weight: bold;
+}
+
+.badge.blink-bg {
+    animation: blink-background 1.5s infinite;
+}
