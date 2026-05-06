@@ -1147,7 +1147,7 @@ var v3: any = new Vue({
         FrissNewKeresDatum: "",
         files: [],
         versionX: "[AIV]{version}[/AIV]",
-        versionNote: "Változások 2026.03.25 (L):  Pénztár visszaigazoló ablak gördíthető",
+        versionNote: "Változások 2026.05.06 (L):  Tortaárak aktualizálása",
         WindowAktPosition: 0,
         SelectedFrissOrderType: "",
         strFilterEgyszerusitettSzamla: "",

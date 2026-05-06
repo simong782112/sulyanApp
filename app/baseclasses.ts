@@ -686,10 +686,10 @@ export class TortaRendeles {
                 switch(this.torta_kategoria){
                     case "I": ossz = 7000; break; 
                     case "II": ossz = 7800; break;
-                    case "III": ossz = 8500; break;
-                    case "IV": ossz = 9500; break;
-                    case "V": ossz = 11500; break;    
-                    case "VI": ossz = 12900; break;  
+                    case "III": ossz = 9900; break;
+                    case "IV": ossz = 10500; break;
+                    case "V": ossz = 12500; break;    
+                    case "VI": ossz = 13500; break;  
                     case "VII": ossz = 13200; break;             
                 }
             }
