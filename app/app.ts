@@ -1089,7 +1089,7 @@ var v3: any = new Vue({
         numVisibleModule: 0,
         moduleTitle: "",
         isMainHeaderVisible: true,
-        isMainMenuVisible: false,
+        isMainMenuVisible: true,
         termekFilterStr: "",
         penztarFilterStr: "",
         termekFilterKateg: 0,

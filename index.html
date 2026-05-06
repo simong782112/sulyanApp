@@ -958,7 +958,7 @@
     </modal>    
 
     <div v-cloak v-show="isMainHeaderVisible" class="alert alert-success" id="infobox" style="margin-top: 55px; margin-bottom: 0px;">                
-            <h4 v-cloak>{{ moduleTitle }} - {{versionNote}} ({{versionX}}) [{{ cntLoading }}] [{{userObject.nev}} ({{userObject.csoport}})]    </h4>  
+            <h4 v-cloak>{{ moduleTitle }} - {{versionNote}} [{{userObject.nev}} ({{userObject.csoport}})]    </h4>  
             <div class="d-flex flex-wrap">
                 <div class="p-1">            
                     <button v-if="numVisibleModule == 0" id="newPenztarBtn" type="button" class="btn btn-primary" v-on:click="penztarToFoodOut()"><i class="fas fa-plus"></i> Új helyben rendelés </button>            
@@ -2459,7 +2459,7 @@
             </div>   
             <div v-cloak  style="margin-top: 20px; text-align: center; width: 100%;">               
                 <span>
-                    {{versionX}} 
+                    {{versionX}}
                     <br>
                     VSulyán https
                 </span>                
